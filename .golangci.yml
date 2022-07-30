@@ -1,0 +1,30 @@
+run:
+  tests: true
+  timeout: 3m
+
+linters:
+  disable-all: true
+  enable:
+    - deadcode
+    - errcheck
+    - gosimple
+    - govet
+    - ineffassign
+    - staticcheck
+    - typechecka
+    - varcheck
+    - unused
+    - gofmt
+    - unconvert
+    - gosec
+    - depguard
+    - dogsled
+    - revive
+
+issues:
+  max-issues-per-linter: 10000
+  max-same-issues: 10000
+
+linters-settings:
+  dogsled:
+    max-blank-identifiers: 3
