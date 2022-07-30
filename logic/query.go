@@ -4,6 +4,7 @@ import (
 	"github.com/Carina-hackatom/coordinator/client/base/query"
 	sdktypes "github.com/cosmos/cosmos-sdk/types"
 	"log"
+	"time"
 )
 
 func OracleInfo(cq *query.CosmosQueryClient, validatorAddr string) (string, int64, []byte) {
@@ -33,4 +34,11 @@ func RewardsWithAddr(cq *query.CosmosQueryClient, delegator string, validator st
 	}()
 	reward = cq.GetRewards(delegator, validator).GetRewards()[0]
 	return reward
+}
+
+func LatestBlockTS(cq *query.CosmosQueryClient) time.Time {
+	secs := cq.GetLatestBlock().GetBlock().GetHeader().GetTime().GetSeconds()
+	nanos := cq.GetLatestBlock().GetBlock().GetHeader().GetTime().GetNanos()
+	currentTs := time.Unix(secs, int64(nanos)).UTC()
+	return currentTs
 }
