@@ -86,3 +86,19 @@ func IcaAutoStake(host string, ctx client.Context, txf tx.Factory, botInfo keyri
 		i++
 	}
 }
+
+func IcaStake(host string, ctx client.Context, txf tx.Factory, botInfo keyring.Info, chanID string, interval int, errLogger *os.File) {
+
+	i := 0
+	intv := time.Duration(interval)
+	for {
+		botTickLog("ICA-Staking", int(intv)*i)
+
+		msg1 := novaTx.MakeMsgDelegate(host, botInfo.GetAddress(), "transfer", chanID)
+		msgs := []sdktypes.Msg{msg1}
+		log.Println("----> MsgDelegate was sent")
+		base.GenTxWithFactory(errLogger, ctx, txf, false, msgs...)
+		time.Sleep(intv * time.Second)
+		i++
+	}
+}
