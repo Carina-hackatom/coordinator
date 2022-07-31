@@ -11,22 +11,22 @@ BUILD_TARGETS := build install
 build: BUILD_ARGS=-o $(BUILD_DIR)/
 
 run:
-	@GOARCH=$(ARCH) go run ./cmd/$(TARGET) $(FLAGS)
+	GOARCH=$(ARCH) go run ./cmd/$(TARGET) $(FLAGS)
 
 $(BUILD_TARGETS): go.sum $(BUILD_DIR)/
 	@echo "--> $@ "
-	@GOARCH=$(ARCH) go $@ -mod=readonly $(BUILD_ARGS) ./...
+	GOARCH=$(ARCH) go $@ -mod=readonly $(BUILD_ARGS) ./...
 
 $(BUILD_DIR)/:
 	mkdir -p $(BUILD_DIR)/
 
 go.sum: go.mod
 	@echo "Ensure dependencies have not been modified" >&2
-	GOPRIVATE=github.com/Carina-labs go mod verify
-	GOPRIVATE=github.com/Carina-labs go mod tidy
+	go mod verify
+	go mod tidy
 
 .PHONY: lint
 
 lint:
 	@echo "--> Running linter"
-	@golangci-lint run --out-format=tab
+	golangci-lint run --out-format=tab

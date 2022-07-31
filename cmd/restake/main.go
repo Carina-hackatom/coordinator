@@ -27,14 +27,13 @@ func init() {
 
 func main() {
 	isTest := flag.Bool("test", false, "Decide whether it's test with localnet")
-	apiAddr := flag.String("api", "127.0.0.1:3335", "Set bot api address")
 	keyname := flag.String("name", "nova_bot", "Set unique key name (uid)")
 	newacc := flag.Bool("add", false, "Start client with making new account")
 	hostchain := flag.String("host", "gaia", "Name of the host chain from which to obtain reward info")
 	intv := flag.Int("interval", 6*60*60, "Re-stake interval (sec)")
 	disp := flag.Bool("display", false, "Show context log through stdout")
 	flag.Parse()
-	flags := cfg.FlagOpts{Test: *isTest, New: *newacc, Disp: *disp, ExtIP: *apiAddr, Kn: *keyname, Host: *hostchain, Period: *intv}
+	flags := cfg.FlagOpts{Test: *isTest, New: *newacc, Disp: *disp, Kn: *keyname, Host: *hostchain, Period: *intv}
 
 	wg.Add(1)
 

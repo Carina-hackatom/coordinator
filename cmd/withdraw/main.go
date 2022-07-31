@@ -27,7 +27,6 @@ func init() {
 
 func main() {
 	isTest := flag.Bool("test", false, "Decide whether it's test with localnet")
-	apiAddr := flag.String("api", "127.0.0.1:3337", "Set bot api address")
 	keyname := flag.String("name", "nova_bot", "Set unique key name (uid)")
 	newacc := flag.Bool("add", false, "Start client with making new account")
 	chanID := flag.String("ch", "channel-2", "Host Transfer Channel ID")
@@ -35,7 +34,7 @@ func main() {
 	intv := flag.Int("interval", 21*24*60*60, "Withdraw interval (sec)")
 	disp := flag.Bool("display", false, "Show context log through stdout")
 	flag.Parse()
-	flags := cfg.FlagOpts{Test: *isTest, New: *newacc, Disp: *disp, ExtIP: *apiAddr, Kn: *keyname, Host: *hostchain, Period: *intv, IBCChan: cfg.IBCChan{Host: cfg.IBCPort{Transfer: *chanID}}}
+	flags := cfg.FlagOpts{Test: *isTest, New: *newacc, Disp: *disp, Kn: *keyname, Host: *hostchain, Period: *intv, IBCChan: cfg.IBCChan{Host: cfg.IBCPort{Transfer: *chanID}}}
 
 	wg.Add(1)
 
