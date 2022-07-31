@@ -21,7 +21,7 @@ $(BUILD_DIR)/:
 	mkdir -p $(BUILD_DIR)/
 
 go.sum: go.mod
-	echo "Ensure dependencies have not been modified" >&2
+	@echo "Ensure dependencies have not been modified" >&2
 	GOPRIVATE=github.com/Carina-labs go mod verify
 	GOPRIVATE=github.com/Carina-labs go mod tidy
 
